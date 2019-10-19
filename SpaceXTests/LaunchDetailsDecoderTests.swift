@@ -19,6 +19,7 @@ class LaunchDetailsDecoderTests: XCTestCase {
         }
         XCTAssertEqual(launchDetails.flightNumber, 1)
         XCTAssertEqual(launchDetails.missionName, "FalconSat")
+        XCTAssertEqual(launchDetails.launchSuccess, .fail)
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withYear, .withMonth, .withDay, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
         let date = formatter.date(from: "2006-03-24T22:30:00.000Z")

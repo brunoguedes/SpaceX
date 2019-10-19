@@ -8,21 +8,24 @@
 
 import Foundation
 
-struct LaunchDetails {
-    let flightNumber: Int
-    let missionName: String
-    let date: Date
-    let launchSuccess: Bool
+class LaunchDetails: Launch {
     let details: String
     let rocketId: String
-}
+    
+    init(
+        flightNumber: Int,
+        missionName: String,
+        date: Date,
+        launchSuccess: LaunchStatus,
+        details: String,
+        rocketId: String
+    ) {
+        self.details = details
+        self.rocketId = rocketId
+        super.init(flightNumber: flightNumber, missionName: missionName, date: date, launchSuccess: launchSuccess)
+    }
 
-extension LaunchDetails: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case flightNumber = "flight_number"
-        case missionName = "mission_name"
-        case date = "launch_date_utc"
-        case launchSuccess = "launch_success"
+    enum LaunchDetailsCodingKeys: String, CodingKey {
         case details = "details"
         case rocket = "rocket"
         case rocketId = "rocket_id"
@@ -32,22 +35,16 @@ extension LaunchDetails: Decodable {
         case rocketId = "rocket_id"
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.flightNumber = try container.decode(Int.self, forKey: .flightNumber)
-        self.missionName = try container.decode(String.self, forKey: .missionName)
-        let dateString = try container.decode(String.self, forKey: .date)
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withYear, .withMonth, .withDay, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
-        if let date = formatter.date(from: dateString) {
-            self.date = date
-        } else {
-            throw DecodingError.dataCorruptedError(forKey: .date, in: container, debugDescription: "Invalid date format")
+    required init(from decoder: Decoder) throws {
+        do {
+            let container = try decoder.container(keyedBy: LaunchDetailsCodingKeys.self)
+            self.details = try container.decode(String.self, forKey: .details)
+            let rocketDecoder = try container.superDecoder(forKey: .rocket)
+            let rocketContainer = try rocketDecoder.container(keyedBy: RocketCodingKeys.self)
+            self.rocketId = try rocketContainer.decode(String.self, forKey: .rocketId)
+            try super.init(from: decoder)
+        } catch let error {
+            throw error
         }
-        self.launchSuccess = try container.decode(Bool.self, forKey: .launchSuccess)
-        self.details = try container.decode(String.self, forKey: .details)
-        let rocketDecoder = try container.superDecoder(forKey: .rocket)
-        let rocketContainer = try rocketDecoder.container(keyedBy: RocketCodingKeys.self)
-        self.rocketId = try rocketContainer.decode(String.self, forKey: .rocketId)
     }
 }

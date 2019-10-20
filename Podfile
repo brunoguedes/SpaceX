@@ -8,6 +8,7 @@ target 'SpaceX' do
   # Pods for SpaceX
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
+  pod 'RxDataSources', '~> 4.0'
 
   target 'SpaceXTests' do
     inherit! :search_paths

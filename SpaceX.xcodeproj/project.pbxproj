@@ -27,6 +27,13 @@
 		F70D7092235AFE8D008A7A93 /* SpaceXServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D7091235AFE8D008A7A93 /* SpaceXServiceTests.swift */; };
 		F70D7096235B1819008A7A93 /* ValidEmptyResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = F70D7095235B1819008A7A93 /* ValidEmptyResponse.json */; };
 		F70D7099235B9C07008A7A93 /* Launches.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D7098235B9C07008A7A93 /* Launches.swift */; };
+		F70D709E235BC41C008A7A93 /* LaunchesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D709D235BC41C008A7A93 /* LaunchesViewModel.swift */; };
+		F70D70A0235BC7ED008A7A93 /* LaunchesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D709F235BC7ED008A7A93 /* LaunchesViewModelTests.swift */; };
+		F70D70A3235C0731008A7A93 /* LaunchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70A2235C0731008A7A93 /* LaunchesViewController.swift */; };
+		F70D70A6235C3E5B008A7A93 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70A5235C3E5B008A7A93 /* UIView+Utils.swift */; };
+		F70D70A9235C44BF008A7A93 /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70A8235C44BF008A7A93 /* LaunchTableViewCell.swift */; };
+		F70D70AB235C4550008A7A93 /* CGFLoat+Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70AA235C4550008A7A93 /* CGFLoat+Spacing.swift */; };
+		F70D70AD235C4A0B008A7A93 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70AC235C4A0B008A7A93 /* LaunchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +75,13 @@
 		F70D7091235AFE8D008A7A93 /* SpaceXServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXServiceTests.swift; sourceTree = "<group>"; };
 		F70D7095235B1819008A7A93 /* ValidEmptyResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ValidEmptyResponse.json; sourceTree = "<group>"; };
 		F70D7098235B9C07008A7A93 /* Launches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launches.swift; sourceTree = "<group>"; };
+		F70D709D235BC41C008A7A93 /* LaunchesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewModel.swift; sourceTree = "<group>"; };
+		F70D709F235BC7ED008A7A93 /* LaunchesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewModelTests.swift; sourceTree = "<group>"; };
+		F70D70A2235C0731008A7A93 /* LaunchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewController.swift; sourceTree = "<group>"; };
+		F70D70A5235C3E5B008A7A93 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
+		F70D70A8235C44BF008A7A93 /* LaunchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewCell.swift; sourceTree = "<group>"; };
+		F70D70AA235C4550008A7A93 /* CGFLoat+Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFLoat+Spacing.swift"; sourceTree = "<group>"; };
+		F70D70AC235C4A0B008A7A93 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,9 +150,13 @@
 				F70D705D2359B3F7008A7A93 /* Assets.xcassets */,
 				F70D705F2359B3F7008A7A93 /* LaunchScreen.storyboard */,
 				F70D70622359B3F7008A7A93 /* Info.plist */,
+				F70D70A4235C3E45008A7A93 /* Helpers */,
 				F70D709A235BC28C008A7A93 /* AppBase */,
 				F70D7088235AAECA008A7A93 /* APIService */,
 				F70D70792359CF7A008A7A93 /* Models */,
+				F70D70A7235C445B008A7A93 /* Views */,
+				F70D70A1235C06F3008A7A93 /* ViewControllers */,
+				F70D709C235BC3EA008A7A93 /* ViewModels */,
 			);
 			path = SpaceX;
 			sourceTree = "<group>";
@@ -146,11 +164,12 @@
 		F70D706A2359B3F7008A7A93 /* SpaceXTests */ = {
 			isa = PBXGroup;
 			children = (
+				F70D706D2359B3F7008A7A93 /* Info.plist */,
 				F70D7097235B1A1E008A7A93 /* Mocking */,
 				F70D706B2359B3F7008A7A93 /* LaunchDetailsDecoderTests.swift */,
 				F70D7086235AA0D1008A7A93 /* RocketDetailsDecoderTests.swift */,
 				F70D7091235AFE8D008A7A93 /* SpaceXServiceTests.swift */,
-				F70D706D2359B3F7008A7A93 /* Info.plist */,
+				F70D709F235BC7ED008A7A93 /* LaunchesViewModelTests.swift */,
 			);
 			path = SpaceXTests;
 			sourceTree = "<group>";
@@ -202,6 +221,40 @@
 				F70D70772359BFAA008A7A93 /* FlowCoordinator.swift */,
 			);
 			path = AppBase;
+			sourceTree = "<group>";
+		};
+		F70D709C235BC3EA008A7A93 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F70D709D235BC41C008A7A93 /* LaunchesViewModel.swift */,
+				F70D70AC235C4A0B008A7A93 /* LaunchViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F70D70A1235C06F3008A7A93 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F70D70A2235C0731008A7A93 /* LaunchesViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F70D70A4235C3E45008A7A93 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F70D70A5235C3E5B008A7A93 /* UIView+Utils.swift */,
+				F70D70AA235C4550008A7A93 /* CGFLoat+Spacing.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F70D70A7235C445B008A7A93 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F70D70A8235C44BF008A7A93 /* LaunchTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,13 +447,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F70D70552359B3F6008A7A93 /* AppDelegate.swift in Sources */,
+				F70D70AB235C4550008A7A93 /* CGFLoat+Spacing.swift in Sources */,
 				F70D708A235AAF15008A7A93 /* SpaceXService.swift in Sources */,
 				F70D707D2359CFC0008A7A93 /* RocketDetails.swift in Sources */,
+				F70D709E235BC41C008A7A93 /* LaunchesViewModel.swift in Sources */,
 				F70D70572359B3F6008A7A93 /* SceneDelegate.swift in Sources */,
 				F70D7099235B9C07008A7A93 /* Launches.swift in Sources */,
 				F70D708E235AF3C7008A7A93 /* BaseService.swift in Sources */,
+				F70D70A3235C0731008A7A93 /* LaunchesViewController.swift in Sources */,
+				F70D70AD235C4A0B008A7A93 /* LaunchViewModel.swift in Sources */,
 				F70D70782359BFAA008A7A93 /* FlowCoordinator.swift in Sources */,
 				F70D707B2359CFB2008A7A93 /* LaunchDetails.swift in Sources */,
+				F70D70A9235C44BF008A7A93 /* LaunchTableViewCell.swift in Sources */,
+				F70D70A6235C3E5B008A7A93 /* UIView+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +469,7 @@
 			files = (
 				F70D706C2359B3F7008A7A93 /* LaunchDetailsDecoderTests.swift in Sources */,
 				F70D7090235AF830008A7A93 /* MockBaseService.swift in Sources */,
+				F70D70A0235BC7ED008A7A93 /* LaunchesViewModelTests.swift in Sources */,
 				F70D7087235AA0D1008A7A93 /* RocketDetailsDecoderTests.swift in Sources */,
 				F70D7092235AFE8D008A7A93 /* SpaceXServiceTests.swift in Sources */,
 			);

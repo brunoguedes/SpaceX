@@ -13,7 +13,7 @@ struct FlowCoordinator {
     let navigationController: UINavigationController
     
     init() {
-        let viewController = UIViewController()
-        navigationController = UINavigationController(rootViewController: viewController)
+        let launchesViewController = LaunchesViewController()
+        navigationController = UINavigationController(rootViewController: launchesViewController)
     }
 }

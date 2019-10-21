@@ -114,6 +114,16 @@ class LaunchesViewController: UIViewController {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        tableView.rx
+            .itemSelected
+            .map { indexPath in
+                return dataSource[indexPath].launch.flightNumber
+            }
+            .subscribe(onNext: { flightNumber in
+                print("Flight Number: \(flightNumber)")
+            })
+            .disposed(by: disposeBag)
+        
         spaceXService.isLoading
             .bind(to: spinnerView.rx.isAnimating)
             .disposed(by: disposeBag)

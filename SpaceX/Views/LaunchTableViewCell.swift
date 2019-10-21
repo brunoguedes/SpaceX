@@ -18,6 +18,7 @@ class LaunchTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         addNameLabel()
         addDateLabel()
         addStatusLabel()
@@ -46,7 +47,7 @@ class LaunchTableViewCell: UITableViewCell {
         nameLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: UIFont.systemFont(ofSize: 20))
         nameLabel.numberOfLines = 0
         nameLabel.backgroundColor = .clear
-        nameLabel.textColor = .darkText
+        nameLabel.textColor = .label
         nameLabel.textAlignment = .left
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.clipsToBounds = true

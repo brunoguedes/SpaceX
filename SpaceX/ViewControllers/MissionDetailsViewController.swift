@@ -55,6 +55,8 @@ class MissionDetailsViewController: UIViewController {
         
         linkButton.setTitle(Constants.linkButtonTitle, for: .normal)
         linkButton.setTitleColor(.link, for: .normal)
+        linkButton.setTitleColor(.systemGray5, for: .disabled)
+        linkButton.isEnabled = false
         linkView.addPinned(subView: linkButton, leading: .spacing3x, trailing: -.spacing3x, top: .spacing3x, bottom: -.spacing3x)
         
         spinnerView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,8 +79,9 @@ class MissionDetailsViewController: UIViewController {
             guard let this = self else { return }
             let missionDetails = MissionDetailsViewModel(launchDetails: details.0, rocketDetails: details.1)
             this.textView.text = missionDetails.details
+            this.linkButton.isEnabled = true
             this.linkButton.rx.tap.bind {
-                let webViewController = UIViewController()
+                let webViewController = WebPageViewController(url: missionDetails.wikipediaURL)
                 this.navigationController?.pushViewController(webViewController, animated: true)
             }.disposed(by: this.disposeBag)
         }).disposed(by: disposeBag)

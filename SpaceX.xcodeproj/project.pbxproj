@@ -36,6 +36,7 @@
 		F70D70AD235C4A0B008A7A93 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70AC235C4A0B008A7A93 /* LaunchViewModel.swift */; };
 		F70D70AF235DBCC0008A7A93 /* MissionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70AE235DBCC0008A7A93 /* MissionDetailsViewController.swift */; };
 		F70D70B1235DD913008A7A93 /* MissionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70D70B0235DD913008A7A93 /* MissionDetailsViewModel.swift */; };
+		F72BCDFA235DF028001B06F2 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72BCDF9235DF028001B06F2 /* WebPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		F70D70AC235C4A0B008A7A93 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		F70D70AE235DBCC0008A7A93 /* MissionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsViewController.swift; sourceTree = "<group>"; };
 		F70D70B0235DD913008A7A93 /* MissionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsViewModel.swift; sourceTree = "<group>"; };
+		F72BCDF9235DF028001B06F2 /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 			children = (
 				F70D70A2235C0731008A7A93 /* LaunchesViewController.swift */,
 				F70D70AE235DBCC0008A7A93 /* MissionDetailsViewController.swift */,
+				F72BCDF9235DF028001B06F2 /* WebPageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				F70D7099235B9C07008A7A93 /* Launches.swift in Sources */,
 				F70D708E235AF3C7008A7A93 /* BaseService.swift in Sources */,
 				F70D70A3235C0731008A7A93 /* LaunchesViewController.swift in Sources */,
+				F72BCDFA235DF028001B06F2 /* WebPageViewController.swift in Sources */,
 				F70D70AD235C4A0B008A7A93 /* LaunchViewModel.swift in Sources */,
 				F70D70782359BFAA008A7A93 /* FlowCoordinator.swift in Sources */,
 				F70D707B2359CFB2008A7A93 /* LaunchDetails.swift in Sources */,

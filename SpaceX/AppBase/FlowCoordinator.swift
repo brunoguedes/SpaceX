@@ -8,12 +8,27 @@
 
 import UIKit
 
-struct FlowCoordinator {
+class FlowCoordinator {
     
-    let navigationController: UINavigationController
+    let navigationController = UINavigationController()
     
-    init() {
-        let launchesViewController = LaunchesViewController()
-        navigationController = UINavigationController(rootViewController: launchesViewController)
+    func createNavigation() -> UINavigationController {
+        let launchesViewController = LaunchesViewController { [weak self] (flightNumber) in
+            self?.navigateToMissionDetails(for: flightNumber)
+        }
+        navigationController.viewControllers = [launchesViewController]
+        return navigationController
+    }
+    
+    func navigateToMissionDetails(for flightNumber: Int) {
+        let missionDetailsViewController = MissionDetailsViewController(flightNumber: flightNumber) { [weak self] (url) in
+            self?.navigateToWebPage(with: url)
+        }
+        navigationController.pushViewController(missionDetailsViewController, animated: true)
+    }
+    
+    func navigateToWebPage(with url: URL) {
+        let webViewController = WebPageViewController(url: url)
+        navigationController.pushViewController(webViewController, animated: true)
     }
 }

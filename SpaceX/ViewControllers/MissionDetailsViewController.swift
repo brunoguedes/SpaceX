@@ -19,15 +19,17 @@ class MissionDetailsViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private let spaceXService: SpaceXService
+    private let linkSelectionHandler: (URL) -> Void
     private let spinnerView = UIActivityIndicatorView(style: .large)
     private let detailsObservable: Observable<(LaunchDetails, RocketDetails)>
     private let textView = UITextView()
     private let linkView = UIView()
     private let linkButton = UIButton()
 
-    init(spaceXService: SpaceXService = SpaceXService(), flightNumber: Int) {
+    init(spaceXService: SpaceXService = SpaceXService(), flightNumber: Int, linkSelectionHandler: @escaping (URL) -> Void) {
         self.spaceXService = spaceXService
         self.detailsObservable = spaceXService.getLaunchAndRocketDetails(for: flightNumber)
+        self.linkSelectionHandler = linkSelectionHandler
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -81,8 +83,7 @@ class MissionDetailsViewController: UIViewController {
             this.textView.text = missionDetails.details
             this.linkButton.isEnabled = true
             this.linkButton.rx.tap.bind {
-                let webViewController = WebPageViewController(url: missionDetails.wikipediaURL)
-                this.navigationController?.pushViewController(webViewController, animated: true)
+                this.linkSelectionHandler(missionDetails.wikipediaURL)
             }.disposed(by: this.disposeBag)
         }).disposed(by: disposeBag)
         

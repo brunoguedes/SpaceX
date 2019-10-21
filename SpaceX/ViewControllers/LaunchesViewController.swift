@@ -23,6 +23,7 @@ class LaunchesViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     private let spaceXService: SpaceXService
+    private let launchSelectionHandler: (Int) -> Void
     private let controlsView = UIView()
     private let sortingSegmentedControl = UISegmentedControl(items: [Constants.sortByDateText, Constants.sortByMissionNameText])
     private let filteringingSegmentedControl = UISegmentedControl(items: [Constants.noFilterText, Constants.filterSuccessfulText])
@@ -33,8 +34,9 @@ class LaunchesViewController: UIViewController {
     private let filterOnlySuccessful = false
     private let sortedBy: LaunchesViewModel.SortBy = .date
     
-    init(spaceXService: SpaceXService = SpaceXService()) {
+    init(spaceXService: SpaceXService = SpaceXService(), launchSelectionHandler: @escaping (Int) -> Void) {
         self.spaceXService = spaceXService
+        self.launchSelectionHandler = launchSelectionHandler
         let launches = spaceXService.getLaunches()
         self.viewModel = LaunchesViewModel(
             launches: launches,
@@ -120,9 +122,7 @@ class LaunchesViewController: UIViewController {
                 return dataSource[indexPath].launch.flightNumber
             }
             .subscribe(onNext: { [weak self] flightNumber in
-                guard let this = self else { return }
-                let missionDetailsViewController = MissionDetailsViewController(spaceXService: this.spaceXService, flightNumber: flightNumber)
-                self?.navigationController?.pushViewController(missionDetailsViewController, animated: true)
+                self?.launchSelectionHandler(flightNumber)
             })
             .disposed(by: disposeBag)
         

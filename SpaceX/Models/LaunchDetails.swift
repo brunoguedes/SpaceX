@@ -9,7 +9,7 @@
 import Foundation
 
 class LaunchDetails: Launch {
-    let details: String
+    let launchSiteName: String
     let rocketId: String
     
     init(
@@ -17,28 +17,33 @@ class LaunchDetails: Launch {
         missionName: String,
         date: Date,
         launchSuccess: LaunchStatus,
-        details: String,
+        launchSiteName: String,
         rocketId: String
     ) {
-        self.details = details
+        self.launchSiteName = launchSiteName
         self.rocketId = rocketId
         super.init(flightNumber: flightNumber, missionName: missionName, date: date, launchSuccess: launchSuccess)
     }
 
     enum LaunchDetailsCodingKeys: String, CodingKey {
-        case details = "details"
+        case launchSite = "launch_site"
         case rocket = "rocket"
-        case rocketId = "rocket_id"
     }
     
     enum RocketCodingKeys: String, CodingKey {
         case rocketId = "rocket_id"
     }
     
+    enum LaunchSiteKeys: String, CodingKey {
+        case launchSiteName = "site_name_long"
+    }
+    
     required init(from decoder: Decoder) throws {
         do {
             let container = try decoder.container(keyedBy: LaunchDetailsCodingKeys.self)
-            self.details = try container.decode(String.self, forKey: .details)
+            let launchSiteDecoder = try container.superDecoder(forKey: .launchSite)
+            let launchSiteContainer = try launchSiteDecoder.container(keyedBy: LaunchSiteKeys.self)
+            self.launchSiteName = try launchSiteContainer.decode(String.self, forKey: .launchSiteName)
             let rocketDecoder = try container.superDecoder(forKey: .rocket)
             let rocketContainer = try rocketDecoder.container(keyedBy: RocketCodingKeys.self)
             self.rocketId = try rocketContainer.decode(String.self, forKey: .rocketId)

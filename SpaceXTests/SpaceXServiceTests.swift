@@ -103,7 +103,7 @@ class SpaceXServiceTests: XCTestCase {
             XCTAssertEqual(launchDetails.flightNumber, 1)
             XCTAssertEqual(launchDetails.missionName, "FalconSat")
             XCTAssertEqual(launchDetails.date, dateFormatter.date(from: "2006-03-24T22:30:00.000Z"))
-            XCTAssertEqual(launchDetails.details, "Engine failure at 33 seconds and loss of vehicle")
+            XCTAssertEqual(launchDetails.launchSiteName, "Kwajalein Atoll Omelek Island")
             XCTAssertEqual(launchDetails.rocketId, "falcon1")
         case .failed(_, let error):
             XCTFail(error.localizedDescription)

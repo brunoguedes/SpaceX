@@ -18,7 +18,7 @@ protocol SpaceXServiceProtocol {
 
 class SpaceXService: SpaceXServiceProtocol {
     var isLoading: Observable<Bool> {
-        return isLoadingSubject.asObservable()
+        return isLoadingSubject.asObservable().observeOn(MainScheduler.instance)
     }
     
     let baseService: BaseServiceProtocol
@@ -47,7 +47,7 @@ class SpaceXService: SpaceXServiceProtocol {
             } catch {
                 throw BaseServiceError.invalidJSON
             }
-        }
+        }.observeOn(MainScheduler.instance)
     }
     
     func getLaunchDetails(for flightNumber: Int) -> Observable<LaunchDetails> {
@@ -68,7 +68,7 @@ class SpaceXService: SpaceXServiceProtocol {
             } catch {
                 throw BaseServiceError.invalidJSON
             }
-        }
+        }.observeOn(MainScheduler.instance)
     }
 
     func getRocketDetails(for rocketId: String) -> Observable<RocketDetails> {
@@ -89,6 +89,19 @@ class SpaceXService: SpaceXServiceProtocol {
             } catch {
                 throw BaseServiceError.invalidJSON
             }
-        }
+        }.observeOn(MainScheduler.instance)
     }
+    
+    func getLaunchAndRocketDetails(for flightNumber: Int) -> Observable<(LaunchDetails, RocketDetails)> {
+        return getLaunchDetails(for: flightNumber).flatMap { [weak self] (launchDetails) -> Observable<(LaunchDetails, RocketDetails)> in
+            guard let this = self else {
+                fatalError()
+            }
+            return this.getRocketDetails(for: launchDetails.rocketId)
+                .map { (rocketDetails) -> (LaunchDetails, RocketDetails) in
+                    return (launchDetails, rocketDetails)
+            }
+        }.observeOn(MainScheduler.instance)
+    }
+    
 }

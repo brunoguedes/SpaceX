@@ -119,8 +119,10 @@ class LaunchesViewController: UIViewController {
             .map { indexPath in
                 return dataSource[indexPath].launch.flightNumber
             }
-            .subscribe(onNext: { flightNumber in
-                print("Flight Number: \(flightNumber)")
+            .subscribe(onNext: { [weak self] flightNumber in
+                guard let this = self else { return }
+                let missionDetailsViewController = MissionDetailsViewController(spaceXService: this.spaceXService, flightNumber: flightNumber)
+                self?.navigationController?.pushViewController(missionDetailsViewController, animated: true)
             })
             .disposed(by: disposeBag)
         

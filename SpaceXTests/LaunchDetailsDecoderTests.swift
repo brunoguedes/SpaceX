@@ -24,7 +24,7 @@ class LaunchDetailsDecoderTests: XCTestCase {
         formatter.formatOptions = [.withYear, .withMonth, .withDay, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
         let date = formatter.date(from: "2006-03-24T22:30:00.000Z")
         XCTAssertEqual(launchDetails.date, date)
-        XCTAssertEqual(launchDetails.details, "Engine failure at 33 seconds and loss of vehicle")
+        XCTAssertEqual(launchDetails.launchSiteName, "Kwajalein Atoll Omelek Island")
         XCTAssertEqual(launchDetails.rocketId, "falcon1")
     }
 

@@ -88,6 +88,7 @@
 		F70D70AE235DBCC0008A7A93 /* MissionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsViewController.swift; sourceTree = "<group>"; };
 		F70D70B0235DD913008A7A93 /* MissionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsViewModel.swift; sourceTree = "<group>"; };
 		F72BCDF9235DF028001B06F2 /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
+		F72BCDFB235E6EC5001B06F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +134,7 @@
 		F70D70482359B3F6008A7A93 = {
 			isa = PBXGroup;
 			children = (
+				F72BCDFB235E6EC5001B06F2 /* README.md */,
 				F70D70532359B3F6008A7A93 /* SpaceX */,
 				F70D706A2359B3F7008A7A93 /* SpaceXTests */,
 				F70D70522359B3F6008A7A93 /* Products */,

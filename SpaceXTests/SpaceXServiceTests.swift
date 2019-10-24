@@ -29,7 +29,7 @@ class SpaceXServiceTests: XCTestCase {
     
     func testGetLaunches() {
         let mockBaseService = MockBaseService()
-        mockBaseService.mockResponse = .launches
+        mockBaseService.mockResponses = [.launches]
         let spaceXService = SpaceXService(baseService: mockBaseService)
         let result = spaceXService.getLaunches().toBlocking().materialize()
         switch result {
@@ -76,7 +76,7 @@ class SpaceXServiceTests: XCTestCase {
     
     func testFailedGetLaunches() {
         let mockBaseService = MockBaseService()
-        mockBaseService.mockResponse = .empty
+        mockBaseService.mockResponses = [.empty]
         let spaceXService = SpaceXService(baseService: mockBaseService)
         let result = spaceXService.getLaunches().toBlocking().materialize()
         switch result {
@@ -91,7 +91,7 @@ class SpaceXServiceTests: XCTestCase {
     
     func testSuccessfulGetLaunchDetails() {
         let mockBaseService = MockBaseService()
-        mockBaseService.mockResponse = .launchDetails
+        mockBaseService.mockResponses = [.launchDetails]
         let spaceXService = SpaceXService(baseService: mockBaseService)
         let result = spaceXService.getLaunchDetails(for: 1).toBlocking().materialize()
         switch result {
@@ -112,7 +112,7 @@ class SpaceXServiceTests: XCTestCase {
     
     func testFailedGetLaunchDetails() {
         let mockBaseService = MockBaseService()
-        mockBaseService.mockResponse = .empty
+        mockBaseService.mockResponses = [.empty]
         let spaceXService = SpaceXService(baseService: mockBaseService)
         let result = spaceXService.getLaunchDetails(for: 0).toBlocking().materialize()
         switch result {
@@ -127,7 +127,7 @@ class SpaceXServiceTests: XCTestCase {
     
     func testSuccessfulGetRocketDetails() {
         let mockBaseService = MockBaseService()
-        mockBaseService.mockResponse = .rocketDetails
+        mockBaseService.mockResponses = [.rocketDetails]
         let spaceXService = SpaceXService(baseService: mockBaseService)
         let result = spaceXService.getRocketDetails(for: "falcon9").toBlocking().materialize()
         switch result {
@@ -146,7 +146,7 @@ class SpaceXServiceTests: XCTestCase {
     
     func testFailedGetRocketDetails() {
         let mockBaseService = MockBaseService()
-        mockBaseService.mockResponse = .empty
+        mockBaseService.mockResponses = [.empty]
         let spaceXService = SpaceXService(baseService: mockBaseService)
         let result = spaceXService.getRocketDetails(for: "some_rocket").toBlocking().materialize()
         switch result {
@@ -157,4 +157,40 @@ class SpaceXServiceTests: XCTestCase {
         }
     }
     
+    func testSuccessfulGetaunchAndRocketDetails() {
+        let mockBaseService = MockBaseService()
+        mockBaseService.mockResponses = [.launchDetails, .rocketDetails]
+        let spaceXService = SpaceXService(baseService: mockBaseService)
+        let result = spaceXService.getLaunchAndRocketDetails(for: 1).toBlocking().materialize()
+        switch result {
+        case .completed(let elements):
+            guard let launchAndRocketDetails = elements.first as (LaunchDetails, RocketDetails)? else {
+                XCTFail("Invalid launchDetails")
+                return
+            }
+            XCTAssertEqual(launchAndRocketDetails.0.flightNumber, 1)
+            XCTAssertEqual(launchAndRocketDetails.0.missionName, "FalconSat")
+            XCTAssertEqual(launchAndRocketDetails.0.date, dateFormatter.date(from: "2006-03-24T22:30:00.000Z"))
+            XCTAssertEqual(launchAndRocketDetails.0.launchSiteName, "Kwajalein Atoll Omelek Island")
+            XCTAssertEqual(launchAndRocketDetails.0.rocketId, "falcon1")
+            XCTAssertEqual(launchAndRocketDetails.1.rocketName, "Falcon 9")
+            XCTAssertEqual(launchAndRocketDetails.1.details, "Falcon 9 is a two-stage rocket designed and manufactured by SpaceX for the reliable and safe transport of satellites and the Dragon spacecraft into orbit.")
+            XCTAssertEqual(launchAndRocketDetails.1.wikipediaURL, URL(string: "https://en.wikipedia.org/wiki/Falcon_9"))
+        case .failed(_, let error):
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
+    func testFailedGetaunchAndRocketDetails() {
+        let mockBaseService = MockBaseService()
+        mockBaseService.mockResponses = [.launchDetails, .empty]
+        let spaceXService = SpaceXService(baseService: mockBaseService)
+        let result = spaceXService.getLaunchAndRocketDetails(for: 1).toBlocking().materialize()
+        switch result {
+        case .completed:
+            XCTFail("This call should have failed")
+        case .failed(_, let error):
+            XCTAssertEqual(error.localizedDescription, BaseServiceError.invalidJSON.localizedDescription)
+        }
+    }
 }

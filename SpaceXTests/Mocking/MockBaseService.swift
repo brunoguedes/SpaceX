@@ -19,9 +19,13 @@ class MockBaseService: BaseServiceProtocol {
         case rocketDetails
     }
     
-    public var mockResponse: MockResponses = .empty
+    public var mockResponses: [MockResponses] = [.empty]
     
     private var filename: String  {
+        guard let mockResponse = mockResponses.first else {
+            return "ValidEmptyResponse"
+        }
+        mockResponses.removeFirst()
         switch mockResponse {
         case .empty:
             return "ValidEmptyResponse"

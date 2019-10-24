@@ -21,9 +21,9 @@ class SpaceXService: SpaceXServiceProtocol {
         return isLoadingSubject.asObservable().observeOn(MainScheduler.instance)
     }
     
-    let baseService: BaseServiceProtocol
-    let baseURL = URL(string: "https://api.spacexdata.com/v3/launches")
-    let isLoadingSubject = BehaviorSubject(value: false)
+    private let baseService: BaseServiceProtocol
+    private let baseURL = URL(string: "https://api.spacexdata.com/v3/launches")
+    private let isLoadingSubject = BehaviorSubject(value: false)
     
     init(baseService: BaseServiceProtocol = BaseService()) {
         self.baseService = baseService
